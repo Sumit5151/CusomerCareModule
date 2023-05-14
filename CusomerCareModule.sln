@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CusomerCareModule", "CusomerCareModule.csproj", "{5A972B48-6D97-4851-BC02-8FED089B194D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A972B48-6D97-4851-BC02-8FED089B194D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A972B48-6D97-4851-BC02-8FED089B194D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A972B48-6D97-4851-BC02-8FED089B194D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A972B48-6D97-4851-BC02-8FED089B194D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98084624-36D4-4A22-A79C-4611EA227747}
+	EndGlobalSection
+EndGlobal
