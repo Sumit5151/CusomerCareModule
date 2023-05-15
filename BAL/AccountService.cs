@@ -15,17 +15,18 @@ namespace CusomerCareModule.BAL
 
 
         public UserViewModel GetUser(LoginViewModel loginViewModel)
-        {
-            
+        {           
 
             var user = db.Users.FirstOrDefault(user => user.Email == loginViewModel.Email
                                      && user.Password == loginViewModel.Password);
-            var userViewModel = new UserViewModel();
+            UserViewModel userViewModel = new UserViewModel();
             if (user != null)
             {
                 userViewModel.Name = user.Name;
                 userViewModel.Email = user.Email;
                 userViewModel.RoleId = user.RoleId;
+                userViewModel.Password = user.Password;
+                
             }           
             return userViewModel;
 

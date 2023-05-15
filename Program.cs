@@ -12,6 +12,7 @@ builder.Services.AddDbContext<CustomerCareDbContext>(x => x.UseSqlServer(
     );
 
 builder.Services.AddScoped<IAccountService,AccountService> ();
+builder.Services.AddScoped<ICustomerCareService,CustomerCareService>();
 
 var app = builder.Build();
 
