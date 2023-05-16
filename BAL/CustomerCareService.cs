@@ -6,9 +6,11 @@ namespace CusomerCareModule.BAL
     public class CustomerCareService: ICustomerCareService
     {
         private readonly CustomerCareDbContext db;
-        public CustomerCareService(CustomerCareDbContext _db )
+        private readonly IHttpContextAccessor iHttpContextAccessor;
+        public CustomerCareService(CustomerCareDbContext _db, IHttpContextAccessor _ihttpContextAccessor)
         {
             this.db = _db;
+            this.iHttpContextAccessor = _ihttpContextAccessor;
         }   
 
         public string RegisterComplaint(ComplaintViewModel complaintViewModel)
@@ -21,6 +23,8 @@ namespace CusomerCareModule.BAL
             complaint.DateOfRegistration = DateTime.Now;
             complaint.ActionDate = DateTime.Now;
             complaint.StatusId = 1;
+            complaint.UserId =  iHttpContextAccessor.HttpContext.Session.GetInt32("UserId");
+
 
             db.Complaints.Add(complaint);
             db.SaveChanges();

@@ -30,6 +30,10 @@ namespace CusomerCareModule.Controllers
 
                 if (userViewModel.RoleId != null)
                 {
+
+                    HttpContext.Session.SetString("Name", userViewModel.Name);
+                    HttpContext.Session.SetInt32("UserId", userViewModel.Id);
+
                     if (userViewModel.RoleId == 1)
                     {
                         return RedirectToAction("Index", "User");
@@ -57,6 +61,14 @@ namespace CusomerCareModule.Controllers
 
 
             return View();
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Home");
+
         }
     }
 }

@@ -11,8 +11,10 @@ builder.Services.AddDbContext<CustomerCareDbContext>(x => x.UseSqlServer(
     builder.Configuration.GetConnectionString("CCDB"))  
     );
 
-builder.Services.AddScoped<IAccountService,AccountService> ();
+builder.Services.AddScoped<IAccountService, AccountService> ();
 builder.Services.AddScoped<ICustomerCareService,CustomerCareService>();
+builder.Services.AddSession();  // in the controller
+builder.Services.AddHttpContextAccessor();  //from non-controller class
 
 var app = builder.Build();
 
@@ -23,6 +25,7 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();

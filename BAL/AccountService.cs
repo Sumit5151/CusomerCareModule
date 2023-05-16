@@ -22,6 +22,7 @@ namespace CusomerCareModule.BAL
             UserViewModel userViewModel = new UserViewModel();
             if (user != null)
             {
+                userViewModel.Id = user.Id;
                 userViewModel.Name = user.Name;
                 userViewModel.Email = user.Email;
                 userViewModel.RoleId = user.RoleId;
