@@ -22,7 +22,7 @@ namespace CusomerCareModule.BAL
             complaint.Description = complaintViewModel.Description;
             complaint.DateOfRegistration = DateTime.Now;
             complaint.ActionDate = DateTime.Now;
-            complaint.StatusId = 1;
+            complaint.StatusId = complaintViewModel.StatusId;
             complaint.UserId =  iHttpContextAccessor.HttpContext.Session.GetInt32("UserId");
 
 

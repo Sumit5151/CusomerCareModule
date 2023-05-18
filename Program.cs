@@ -13,6 +13,7 @@ builder.Services.AddDbContext<CustomerCareDbContext>(x => x.UseSqlServer(
 
 builder.Services.AddScoped<IAccountService, AccountService> ();
 builder.Services.AddScoped<ICustomerCareService,CustomerCareService>();
+builder.Services.AddScoped<IManagerService, ManagerService>();
 builder.Services.AddSession();  // in the controller
 builder.Services.AddHttpContextAccessor();  //from non-controller class
 
