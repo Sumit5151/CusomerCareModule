@@ -19,7 +19,7 @@ namespace CusomerCareModule.BAL
             complaint.Name = complaintViewModel.Name;
             complaint.Email = complaintViewModel.Email;
             complaint.MobileNumber = complaintViewModel.MobileNumber;   
-            complaint.Description = complaintViewModel.Description;
+            complaint.Description = complaintViewModel.DescriptionByCC;
             complaint.DateOfRegistration = DateTime.Now;
             complaint.ActionDate = DateTime.Now;
             complaint.StatusId = complaintViewModel.StatusId;
@@ -29,6 +29,15 @@ namespace CusomerCareModule.BAL
             db.Complaints.Add(complaint);
             db.SaveChanges();
 
+
+            ComplaintHistory complaintHistory = new ComplaintHistory();
+            complaintHistory.ComplaintId = complaint.Id;
+            complaintHistory.Description = complaintViewModel.DescriptionByCC; 
+            complaintHistory.CurrentStatus = complaintViewModel.StatusId;
+            complaintHistory.ActionDate = DateTime.Now;
+
+            db.ComplaintHistories.Add(complaintHistory);
+            db.SaveChanges();
 
             return "";
         }

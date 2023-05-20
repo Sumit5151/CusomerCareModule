@@ -1,10 +1,18 @@
 ﻿@model ComplaintViewModel
 @inject IHttpContextAccessor iHttpContextAccessor
 
-<h1>@ViewBag.Heading</h1>
+<h1>{
+    if(@ViewBag.Heading!= null) 
+    {
+    @ViewBag.Heading
+    }
+}
+</h1>
 
 
 <form class="form-horizontal" asp-controller="CustomerCare" asp-action="RegisterComplaint" method="post">
+
+    
 
     <div class="form-group">
         <label class="control-label col-sm-2" asp-for="Name"></label>
@@ -36,38 +44,14 @@
         if (roleId != null && roleId == 2)
         {
             <div class="form-group">
-                <label class="control-label col-sm-2" asp-for="Description"></label>
+                <label class="control-label col-sm-2" asp-for="DescriptionByCC"></label>
                 <div class="col-sm-10">
-                    <textarea rows="2" cols="100" asp-for="Description"></textarea>
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <textarea rows="2" cols="100" asp-for="DescriptionByCC"></textarea>
+                    <span asp-validation-for="DescriptionByCC" class="text-danger"></span>
                 </div>
             </div>
-        }
 
-        else if (roleId != null && roleId == 3)
-        {
              <div class="form-group">
-                <label class="control-label col-sm-6">Comments</label>
-                <div class="col-sm-10">
-                     <label class="control-label col-sm-6">@Model.Description</label>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <label class="control-label col-sm-2">Comments</label>
-                <div class="col-sm-10">
-                    <textarea rows="2" cols="100" asp-for="Description"></textarea>
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-            </div>
-        }
-
-
-    }
-
-
-    <div class="form-group">
         <label class="control-label col-sm-2" asp-for="StatusId"></label>
 
         <select class="col-sm-10" asp-for="StatusId">
@@ -79,6 +63,32 @@
         <span asp-validation-for="StatusId" class="text-danger"></span>
 
     </div>
+        }
+
+        else if (roleId != null && roleId == 3)
+        {
+             <div class="form-group">
+                <label class="control-label col-sm-6">Comments</label>
+                <div class="col-sm-10">
+                     <label class="control-label col-sm-6">@Model.DescriptionByCC</label>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Comments</label>
+                <div class="col-sm-10">
+                    <textarea rows="2" cols="100" asp-for="DescriptionByManager"></textarea>
+                    <span asp-validation-for="DescriptionByManager" class="text-danger"></span>
+                </div>
+            </div>
+        }
+
+
+    }
+
+
+   
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">

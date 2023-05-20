@@ -7,10 +7,12 @@ namespace CusomerCareModule.BAL
     {
 
         private readonly CustomerCareDbContext db;
+        private readonly IHttpContextAccessor iHttpContextAccessor;
 
-        public ManagerService(CustomerCareDbContext _db)
+        public ManagerService(CustomerCareDbContext _db, IHttpContextAccessor _ihttpContextAccessor)
         {
             this.db = _db;
+            this.iHttpContextAccessor = _ihttpContextAccessor;
         }
 
 
@@ -58,13 +60,37 @@ namespace CusomerCareModule.BAL
                 complaintViewModel.Name = complaintdto.Name;
                 complaintViewModel.Email = complaintdto.Email;
                 complaintViewModel.MobileNumber = complaintdto.MobileNumber;
-                complaintViewModel.Description = complaintdto.Description;
+                complaintViewModel.DescriptionByCC = complaintdto.Description;
                 complaintViewModel.StatusId = complaintdto.StatusId;
             }
             return complaintViewModel;
         }
 
 
+        public void UpdateComplaint(ComplaintViewModel complaintViewModel)
+        {
+            var complaint = db.Complaints.FirstOrDefault(x => x.Id == complaintViewModel.Id);
+
+            if (complaint != null)
+            {
+                complaint.Description = complaintViewModel.DescriptionByManager;
+                complaint.ActionDate = DateTime.Now;
+                complaint.UserId = iHttpContextAccessor.HttpContext.Session.GetInt32("UserId");
+                complaint.StatusId = 4;
+                db.Complaints.Update(complaint);
+                db.SaveChanges();
+
+
+
+                ComplaintHistory complaintHistory = new ComplaintHistory();
+                complaintHistory.ComplaintId = complaintViewModel.Id;
+                complaintHistory.CurrentStatus = 4;
+                complaintHistory.Description = complaintViewModel.DescriptionByManager;
+                complaintHistory.ActionDate = DateTime.Now;
+                db.ComplaintHistories.Add(complaintHistory);
+                db.SaveChanges();
+            }
+        }
 
     }
 }

@@ -11,7 +11,8 @@
 
         public string? MobileNumber { get; set; }
 
-        public string? Description { get; set; }
+        public string? DescriptionByCC { get; set; }
+        public string? DescriptionByManager { get; set; }
 
         public int? StatusId { get; set; }
 

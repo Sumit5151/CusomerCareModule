@@ -23,6 +23,8 @@ public partial class Complaint
 
     public int? UserId { get; set; }
 
+    public virtual ICollection<ComplaintHistory> ComplaintHistories { get; set; } = new List<ComplaintHistory>();
+
     public virtual StatusMaster? Status { get; set; }
 
     public virtual User? User { get; set; }

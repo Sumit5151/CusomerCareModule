@@ -7,10 +7,12 @@ namespace CusomerCareModule.Controllers
     public class CustomerCareController : Controller
     {
         private readonly ICustomerCareService customerCareService;
+        private readonly IManagerService managerService;
 
-        public CustomerCareController(ICustomerCareService _customerCareService)
+        public CustomerCareController(ICustomerCareService _customerCareService, IManagerService _managerService)
         {
             this.customerCareService = _customerCareService;
+            this.managerService = _managerService;
         }
 
 
@@ -29,10 +31,28 @@ namespace CusomerCareModule.Controllers
         [HttpPost]
         public IActionResult RegisterComplaint(ComplaintViewModel complaintViewModel)
         {
-            if(ModelState.IsValid == true)
+
+            if (ModelState.IsValid == true)
             {
-                customerCareService.RegisterComplaint(complaintViewModel);
+
+                var roleId = HttpContext.Session.GetInt32("RoleId");
+                if (roleId != null && roleId == 3)
+                {
+                    var compaintId = HttpContext.Session.GetInt32("complaintId");
+                    if (compaintId != null)
+                    {
+                        complaintViewModel.Id = compaintId.Value;
+                    }
+                    managerService.UpdateComplaint(complaintViewModel);
+                }
+                else if (roleId != null && roleId == 2)
+                {
+                    customerCareService.RegisterComplaint(complaintViewModel);
+                }
             }
+
+
+
             @ViewBag.Heading = "Register Complaint";
             return View();
         }

@@ -17,6 +17,8 @@ public partial class CustomerCareDbContext : DbContext
 
     public virtual DbSet<Complaint> Complaints { get; set; }
 
+    public virtual DbSet<ComplaintHistory> ComplaintHistories { get; set; }
+
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<StatusMaster> StatusMasters { get; set; }
@@ -53,6 +55,21 @@ public partial class CustomerCareDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Complaints)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FK__Complaint__UserI__398D8EEE");
+        });
+
+        modelBuilder.Entity<ComplaintHistory>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Complain__3214EC0798F56ED4");
+
+            entity.ToTable("ComplaintHistory");
+
+            entity.Property(e => e.ActionDate).HasColumnType("datetime");
+            entity.Property(e => e.ComplaintId).HasColumnName("ComplaintID");
+            entity.Property(e => e.Description).IsUnicode(false);
+
+            entity.HasOne(d => d.Complaint).WithMany(p => p.ComplaintHistories)
+                .HasForeignKey(d => d.ComplaintId)
+                .HasConstraintName("FK__Complaint__Compl__49C3F6B7");
         });
 
         modelBuilder.Entity<Role>(entity =>

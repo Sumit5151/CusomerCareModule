@@ -28,6 +28,7 @@ namespace CusomerCareModule.Controllers
 
         public IActionResult ViewComplaint(int complaintId)
         {
+            HttpContext.Session.SetInt32("complaintId", complaintId);
             @ViewBag.Heading = "View Complaint";
             var complaintViewModel = managerService.GetComplaint(complaintId);
             return View("Views/CustomerCare/RegisterComplaint.cshtml", complaintViewModel);
