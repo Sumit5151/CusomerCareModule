@@ -6,5 +6,6 @@ namespace CusomerCareModule.BAL
     {
         ManagerDashboardViewModel GetDashBoardData();
         List<ComplaintViewModel> GetComplaints(int status);
+        ComplaintViewModel GetComplaint(int complaintId);
     }
 }

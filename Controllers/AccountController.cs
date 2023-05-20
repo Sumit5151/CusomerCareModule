@@ -33,6 +33,7 @@ namespace CusomerCareModule.Controllers
 
                     HttpContext.Session.SetString("Name", userViewModel.Name);
                     HttpContext.Session.SetInt32("UserId", userViewModel.Id);
+                    HttpContext.Session.SetInt32("RoleId", userViewModel.RoleId.Value);
 
                     if (userViewModel.RoleId == 1)
                     {

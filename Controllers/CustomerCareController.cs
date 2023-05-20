@@ -22,6 +22,7 @@ namespace CusomerCareModule.Controllers
         [HttpGet]
         public IActionResult RegisterComplaint()
         {
+            @ViewBag.Heading = "Register Complaint";
             return View();
         }
 
@@ -32,7 +33,7 @@ namespace CusomerCareModule.Controllers
             {
                 customerCareService.RegisterComplaint(complaintViewModel);
             }
-
+            @ViewBag.Heading = "Register Complaint";
             return View();
         }
     }

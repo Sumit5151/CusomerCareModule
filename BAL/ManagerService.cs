@@ -43,5 +43,28 @@ namespace CusomerCareModule.BAL
             return complaintViewModels;
 
         }
+
+
+
+
+        public ComplaintViewModel GetComplaint(int complaintId)
+        {
+            var complaintdto = db.Complaints.FirstOrDefault(x => x.Id == complaintId);
+            ComplaintViewModel complaintViewModel = new ComplaintViewModel();
+
+            if (complaintdto != null)
+            {
+                complaintViewModel.Id = complaintdto.Id;
+                complaintViewModel.Name = complaintdto.Name;
+                complaintViewModel.Email = complaintdto.Email;
+                complaintViewModel.MobileNumber = complaintdto.MobileNumber;
+                complaintViewModel.Description = complaintdto.Description;
+                complaintViewModel.StatusId = complaintdto.StatusId;
+            }
+            return complaintViewModel;
+        }
+
+
+
     }
 }

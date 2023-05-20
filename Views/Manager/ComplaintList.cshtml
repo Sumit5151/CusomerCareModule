@@ -1,2 +1,29 @@
-﻿@model List<complaintViewModels>
+﻿@model List<ComplaintViewModel>
 
+
+<table class="table tbl-primary">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>View</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @{
+            foreach (var comp in Model)
+            {
+                <tr>
+                    <td>@comp.Id</td>
+                    <td>@comp.Name</td>
+                    <td>@comp.Email</td>
+                    <td> <a asp-action="ViewComplaint" asp-controller="Manager" asp-route-complaintId="@comp.Id">View</a> </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+
+    </tablev>

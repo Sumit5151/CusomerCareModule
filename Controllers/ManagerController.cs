@@ -26,8 +26,13 @@ namespace CusomerCareModule.Controllers
             return View(complaintViewModels);
         }
 
+        public IActionResult ViewComplaint(int complaintId)
+        {
+            @ViewBag.Heading = "View Complaint";
+            var complaintViewModel = managerService.GetComplaint(complaintId);
+            return View("Views/CustomerCare/RegisterComplaint.cshtml", complaintViewModel);
+        }
 
 
-        
     }
 }
