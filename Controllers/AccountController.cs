@@ -39,12 +39,12 @@ namespace CusomerCareModule.Controllers
                     {
                         return RedirectToAction("Index", "User");
                     }
-                    if (userViewModel.RoleId == 2)
-                    {
-                        return RedirectToAction("Index", "CustomerCare");
-                    }
+                    //if (userViewModel.RoleId == 2)
+                    //{
+                    //    return RedirectToAction("Index", "CustomerCare");
+                    //}
 
-                    if (userViewModel.RoleId == 3)
+                    if (userViewModel.RoleId == 2 || userViewModel.RoleId == 3)
                     {
                         return RedirectToAction("Index", "Manager");
                     }

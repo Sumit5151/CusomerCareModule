@@ -1,16 +1,40 @@
-﻿@model ManagerDashboardViewModel
-
-<h1>Welcome Manager</h1>
-
+﻿@model DashboardViewModel
+@inject IHttpContextAccessor iHttpContextAccessor
 
 
-@*1. Registered complaint *@
-@*2. Forwared complaint *@
-@*1. Resolved by CC *@
-@*1. Resolved by Manager *@
+@{
+    var roleId = iHttpContextAccessor.HttpContext.Session.GetInt32("RoleId");
+}
 
 
-<a asp-action="ComplaintList" asp-controller="Manager"  asp-route-status="1">Registered- @Model.RegisteredComplaints</a> <br />
-<a asp-action="ComplaintList" asp-controller="Manager"  asp-route-status="2">Forwarded- @Model.ForwardedComplaints</a><br />
-<a asp-action="ComplaintList" asp-controller="Manager"  asp-route-status="3">Resolved By CC- @Model.ResolvedByCCComplaints</a><br />
-<a asp-action="ComplaintList" asp-controller="Manager"  asp-route-status="4">Resolved By Manager- @Model.ResolvedByManagerComplaints</a>
+@if (roleId != null && roleId == 3)
+{
+    <h1>Welcome Manager</h1>
+
+    <a asp-action="ComplaintList" asp-controller="Manager" asp-route-status="1">Registered- @Model.RegisteredComplaints</a>
+    <br />
+    <a asp-action="ComplaintList" asp-controller="Manager" asp-route-status="2">Forwarded- @Model.ForwardedComplaints</a>
+    <br />
+    <a asp-action="ComplaintList" asp-controller="Manager" asp-route-status="3">Resolved By CC- @Model.ResolvedByCCComplaints</a>
+    <br />
+    <a asp-action="ComplaintList" asp-controller="Manager" asp-route-status="4">Resolved By Manager- @Model.ResolvedByManagerComplaints</a>
+}
+else if (roleId != null && roleId == 2)
+{
+    <h1>Welcome Customer care </h1>
+
+    <a asp-action="RegisterComplaint" asp-controller="CustomerCare">Register Complaint</a>
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <a asp-action="ComplaintList" asp-controller="Manager" asp-route-status="1">Registered- @Model.RegisteredComplaints</a>
+    <br />
+    <a asp-action="ComplaintList" asp-controller="Manager" asp-route-status="2">Forwarded- @Model.ForwardedComplaints</a>
+    <br />
+    <a asp-action="ComplaintList" asp-controller="Manager" asp-route-status="3">Resolved By CC- @Model.ResolvedByCCComplaints</a>
+    <br />
+    <a asp-action="ComplaintList" asp-controller="Manager" asp-route-status="4">Resolved By Manager- @Model.ResolvedByManagerComplaints</a>
+
+}

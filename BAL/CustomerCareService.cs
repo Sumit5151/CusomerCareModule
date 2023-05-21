@@ -35,6 +35,8 @@ namespace CusomerCareModule.BAL
             complaintHistory.Description = complaintViewModel.DescriptionByCC; 
             complaintHistory.CurrentStatus = complaintViewModel.StatusId;
             complaintHistory.ActionDate = DateTime.Now;
+            complaintHistory.UserId = complaint.UserId;
+
 
             db.ComplaintHistories.Add(complaintHistory);
             db.SaveChanges();

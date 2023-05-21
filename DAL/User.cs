@@ -17,6 +17,8 @@ public partial class User
 
     public bool? IsActive { get; set; }
 
+    public virtual ICollection<ComplaintHistory> ComplaintHistories { get; set; } = new List<ComplaintHistory>();
+
     public virtual ICollection<Complaint> Complaints { get; set; } = new List<Complaint>();
 
     public virtual Role? Role { get; set; }

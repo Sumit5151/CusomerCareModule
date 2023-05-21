@@ -15,5 +15,9 @@ public partial class ComplaintHistory
 
     public DateTime? ActionDate { get; set; }
 
+    public int? UserId { get; set; }
+
     public virtual Complaint? Complaint { get; set; }
+
+    public virtual User? User { get; set; }
 }

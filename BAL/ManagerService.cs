@@ -16,10 +16,10 @@ namespace CusomerCareModule.BAL
         }
 
 
-        public ManagerDashboardViewModel GetDashBoardData()
+        public DashboardViewModel GetDashBoardData()
         {
             var ComplaintsStatus = db.Complaints.Select(c => c.StatusId).ToList();
-            ManagerDashboardViewModel managerDashboardViewModel = new ManagerDashboardViewModel();
+            DashboardViewModel managerDashboardViewModel = new DashboardViewModel();
             managerDashboardViewModel.RegisteredComplaints = ComplaintsStatus.Count(x => x == 1);
             managerDashboardViewModel.ForwardedComplaints = ComplaintsStatus.Count(x => x == 2);
             managerDashboardViewModel.ResolvedByCCComplaints = ComplaintsStatus.Count(x => x == 3);
@@ -70,23 +70,39 @@ namespace CusomerCareModule.BAL
         public void UpdateComplaint(ComplaintViewModel complaintViewModel)
         {
             var complaint = db.Complaints.FirstOrDefault(x => x.Id == complaintViewModel.Id);
+            ComplaintHistory complaintHistory = new ComplaintHistory();
 
             if (complaint != null)
             {
-                complaint.Description = complaintViewModel.DescriptionByManager;
+                var roleId = iHttpContextAccessor.HttpContext.Session.GetInt32("RoleId");
+                var userId = iHttpContextAccessor.HttpContext.Session.GetInt32("UserId");
+
+                if (roleId != null && roleId == 3)
+                {
+                    complaint.Description = complaintViewModel.DescriptionByManager;
+                    complaint.StatusId = 4;
+                    //Complaint History
+                    complaintHistory.Description = complaintViewModel.DescriptionByManager;
+                    complaintHistory.CurrentStatus = 4;
+                }
+
+                else if (roleId != null && roleId == 2)
+                {
+                    complaint.Description = complaintViewModel.DescriptionByCC;
+                    complaint.StatusId = complaintViewModel.StatusId;
+
+                    complaintHistory.Description = complaintViewModel.DescriptionByCC;
+                    complaintHistory.CurrentStatus = complaintViewModel.StatusId;
+                }
+
                 complaint.ActionDate = DateTime.Now;
-                complaint.UserId = iHttpContextAccessor.HttpContext.Session.GetInt32("UserId");
-                complaint.StatusId = 4;
+                complaint.UserId = userId;
                 db.Complaints.Update(complaint);
                 db.SaveChanges();
 
-
-
-                ComplaintHistory complaintHistory = new ComplaintHistory();
                 complaintHistory.ComplaintId = complaintViewModel.Id;
-                complaintHistory.CurrentStatus = 4;
-                complaintHistory.Description = complaintViewModel.DescriptionByManager;
                 complaintHistory.ActionDate = DateTime.Now;
+                complaintHistory.UserId = userId;
                 db.ComplaintHistories.Add(complaintHistory);
                 db.SaveChanges();
             }

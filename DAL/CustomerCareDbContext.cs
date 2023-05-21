@@ -70,6 +70,10 @@ public partial class CustomerCareDbContext : DbContext
             entity.HasOne(d => d.Complaint).WithMany(p => p.ComplaintHistories)
                 .HasForeignKey(d => d.ComplaintId)
                 .HasConstraintName("FK__Complaint__Compl__49C3F6B7");
+
+            entity.HasOne(d => d.User).WithMany(p => p.ComplaintHistories)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Complaint__UserI__5AEE82B9");
         });
 
         modelBuilder.Entity<Role>(entity =>

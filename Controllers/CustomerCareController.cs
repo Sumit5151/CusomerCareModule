@@ -25,7 +25,8 @@ namespace CusomerCareModule.Controllers
         public IActionResult RegisterComplaint()
         {
             @ViewBag.Heading = "Register Complaint";
-            return View();
+            ComplaintViewModel complaintViewModel = new ComplaintViewModel();
+            return View(complaintViewModel);
         }
 
         [HttpPost]
@@ -34,18 +35,14 @@ namespace CusomerCareModule.Controllers
 
             if (ModelState.IsValid == true)
             {
-
                 var roleId = HttpContext.Session.GetInt32("RoleId");
-                if (roleId != null && roleId == 3)
+                var compaintId = HttpContext.Session.GetInt32("complaintId");
+                if (compaintId != null)
                 {
-                    var compaintId = HttpContext.Session.GetInt32("complaintId");
-                    if (compaintId != null)
-                    {
-                        complaintViewModel.Id = compaintId.Value;
-                    }
+                    complaintViewModel.Id = compaintId.Value;
                     managerService.UpdateComplaint(complaintViewModel);
                 }
-                else if (roleId != null && roleId == 2)
+                else
                 {
                     customerCareService.RegisterComplaint(complaintViewModel);
                 }
