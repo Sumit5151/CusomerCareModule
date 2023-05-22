@@ -99,3 +99,32 @@
 </form>
 
 
+
+
+@if (@Model.ComplaintHistories != null && @Model.ComplaintHistories.Count > 0)
+{
+    <h1> Complaint History</h1>
+    <table class="table tbl-primary">
+        <thead>
+            <tr>
+                <td>Status</td>
+                <td>Description</td>
+                <td>Userid</td>
+                <td>ActionDate</td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var history in @Model.ComplaintHistories)
+                {
+                    <tr>
+                        <td>@history.CurrentStatus</td>
+                        <td>@history.Description</td>
+                        <td>@history.UserId</td>
+                        <td>@history.ActionDate</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}

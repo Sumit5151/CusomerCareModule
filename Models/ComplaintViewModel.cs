@@ -1,8 +1,15 @@
-﻿namespace CusomerCareModule.Models
+﻿using CusomerCareModule.DAL;
+
+namespace CusomerCareModule.Models
 {
     public class ComplaintViewModel
     {
 
+        public ComplaintViewModel()
+        {
+            ComplaintHistories = new List<ComplaintHistory>();
+            Users = new List<User>();
+        }
         public int Id { get; set; }
 
         public string? Name { get; set; }
@@ -21,5 +28,9 @@
         public DateTime? ActionDate { get; set; }
 
         public int? UserId { get; set; }
+
+        public List<ComplaintHistory> ComplaintHistories { get; set; }
+        public List<User> Users { get; set; }
+
     }
 }

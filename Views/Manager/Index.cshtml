@@ -7,7 +7,7 @@
 }
 
 
-@if (roleId != null && roleId == 3)
+@if (roleId != null && roleId ==  Convert.ToInt32(Roles.Manager))
 {
     <h1>Welcome Manager</h1>
 
@@ -19,7 +19,7 @@
     <br />
     <a asp-action="ComplaintList" asp-controller="Manager" asp-route-status="4">Resolved By Manager- @Model.ResolvedByManagerComplaints</a>
 }
-else if (roleId != null && roleId == 2)
+else if (roleId != null && roleId == Convert.ToInt32(Roles.CustomerCareAssociate))
 {
     <h1>Welcome Customer care </h1>
 
